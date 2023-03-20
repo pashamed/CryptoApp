@@ -16,8 +16,18 @@ namespace CryproApp.ViewModels
 
         public Currency Selected
         {
-            get { return _selected; }
-            set { SetProperty(ref _selected, value); }
+            get
+            {              
+                return _selected;
+            }
+            set
+            {
+                if(_selected != null)
+                {
+                    _selected.candleDataPoints = CurrencyDataService.GetHistoryDataAsync(_selected.Id).Result.Take(10).ToList();
+                } 
+                SetProperty(ref _selected, value);
+            }
         }
 
         public ObservableCollection<Currency> SampleItems { get; private set; } = new ObservableCollection<Currency>();

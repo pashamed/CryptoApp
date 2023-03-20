@@ -7,12 +7,8 @@ namespace CryproApp.Core.Models
 {
     public class CandleDataPoint
     {
-        public string open { get; set; }
-        public string high { get; set; }
-        public string low { get; set; }
-        public string close { get; set; }
-        public string volume { get; set; }
-        public object period { get; set; }
+        public double priceUsd { get; set; }
+        public long time { get; set; }
     }
     public class CandleData
     {
