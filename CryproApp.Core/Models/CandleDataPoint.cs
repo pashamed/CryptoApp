@@ -9,6 +9,7 @@ namespace CryproApp.Core.Models
     {
         public double priceUsd { get; set; }
         public long time { get; set; }
+        public DateTime date { get; set; }
     }
     public class CandleData
     {

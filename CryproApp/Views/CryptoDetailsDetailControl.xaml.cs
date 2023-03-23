@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Runtime.CompilerServices;
 using CryproApp.Core.Models;
 using CryproApp.Core.Services;
 using Windows.UI.Xaml;
@@ -19,7 +19,7 @@ namespace CryproApp.Views
 
         public CryptoDetailsDetailControl()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         private static void OnListMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

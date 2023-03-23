@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CryproApp.Core.Models;
 using CryproApp.Core.Services;
-
+using CryproApp.Views;
+using Microsoft.Toolkit;
+using Microsoft.Toolkit.Uwp;
+using Microsoft.Toolkit.Uwp.Helpers;
+using Microsoft.Toolkit.Uwp.UI;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Newtonsoft.Json.Linq;
+using Telerik.UI.Xaml.Controls.Chart;
+using Windows.UI.Core;
 
 namespace CryproApp.ViewModels
 {
@@ -17,16 +26,20 @@ namespace CryproApp.ViewModels
         public Currency Selected
         {
             get
-            {              
+            {
                 return _selected;
             }
             set
             {
-                if(_selected != null)
+                if (_selected != null)
                 {
-                    _selected.candleDataPoints = CurrencyDataService.GetHistoryDataAsync(_selected.Id).Result.Take(10).ToList();
-                } 
-                SetProperty(ref _selected, value);
+                    var item = SampleItems.FirstOrDefault(i => i.Id == value.Id);
+                    if (item != null)
+                    {
+                        item = Task.Run(async() => await CurrencyDataService.GetHistoryDataAsync(SampleItems.FirstOrDefault(i => i.Id == value.Id))).Result;                       
+                    }
+                }
+                bool newwest = SetProperty(ref _selected, value);
             }
         }
 
@@ -49,6 +62,7 @@ namespace CryproApp.ViewModels
 
             if (viewState == ListDetailsViewState.Both)
             {
+                SampleItems[0] = await CurrencyDataService.GetHistoryDataAsync(SampleItems.First()).ConfigureAwait(true);
                 Selected = SampleItems.First();
             }
         }

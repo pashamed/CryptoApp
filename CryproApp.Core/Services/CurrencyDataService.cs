@@ -46,25 +46,26 @@ namespace CryproApp.Core.Services
             throw new NotImplementedException();
         }
 
-        public static async Task<List<CandleDataPoint>> GetHistoryDataAsync(string CurName)
+        public static async Task<Currency> GetHistoryDataAsync(Currency item)
         {
             CandleData candleData = null;
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://api.coincap.io/v2/assets/"+CurName+"/history?interval=d1");
+                client.BaseAddress = new Uri("http://api.coincap.io/v2/assets/"+item.Id+"/history?interval=d1");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "251cb894-b470-443d-a564-8362e3339dd1");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await client.GetAsync("").ConfigureAwait(false);
+                var response = await client.GetAsync("");
                 response.EnsureSuccessStatusCode();
                 candleData = JsonConvert.DeserializeObject<CandleData>(response.Content.ReadAsStringAsync().Result);
             }
             if(candleData != null)
             {
-                Currencies.Where(cur => cur.Id == CurName).First().candleDataPoints = candleData.data;
+                item.candleDataPoints = candleData.data.Take(10).ToList();
+                //Currencies.Where(cur => cur.Id == item.Id).First().candleDataPoints = candleData.data;
             }           
-            return candleData.data;
+            return item;
         }
     }
 }

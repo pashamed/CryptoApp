@@ -52,21 +52,18 @@
                     Text="Volume used in 24 Hr" />
                 <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.VolumeUsed24Hr, Mode=OneWay}" />
             </StackPanel>
-            <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftMargin}" Width="500">
+            <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftTopMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="400">
                 <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <tc:RadCartesianChart x:Uid="CartesianChart" RenderTransformOrigin="0.5,0.5">
-                        <tc:RadCartesianChart.RenderTransform>
-                            <CompositeTransform Rotation="0"/>
-                        </tc:RadCartesianChart.RenderTransform>
+                    <tc:RadCartesianChart x:Name="PriceChart" x:Uid="CartesianChart" RenderTransformOrigin="0.5,0.5">
                         <tc:RadCartesianChart.HorizontalAxis>
-                            <tc:LinearAxis />
+                            <tc:DateTimeContinuousAxis LabelFitMode="MultiLine" LabelFormat="MMM yyyy"/>
                         </tc:RadCartesianChart.HorizontalAxis>
                         <tc:RadCartesianChart.VerticalAxis>
-                            <tc:LinearAxis />
+                            <tc:LinearAxis Name="USD"/>
                         </tc:RadCartesianChart.VerticalAxis>
-                        <tc:LineSeries ItemsSource="{x:Bind ListMenuItem.candleDataPoints, Mode=OneWay}" ShowLabels="True">
+                        <tc:LineSeries ItemsSource="{x:Bind  ListMenuItem.candleDataPoints, Mode=OneWay}" ShowLabels="True">
                             <tc:LineSeries.CategoryBinding>
-                                <tc:PropertyNameDataPointBinding PropertyName="Time" />
+                                <tc:PropertyNameDataPointBinding PropertyName="date" />
                             </tc:LineSeries.CategoryBinding>
                             <tc:LineSeries.ValueBinding>
                                 <tc:PropertyNameDataPointBinding PropertyName="priceUsd" />
