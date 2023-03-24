@@ -62,8 +62,8 @@ namespace CryproApp.Core.Services
             }
             if(candleData != null)
             {
-                item.candleDataPoints = candleData.data.Take(10).ToList();
-                //Currencies.Where(cur => cur.Id == item.Id).First().candleDataPoints = candleData.data;
+                item.candleDataPoints = candleData.data.Skip(candleData.data.Count() - 15).ToList();
+                item.candleDataPoints.ForEach(i => i.priceUsd = Math.Round(i.priceUsd, 3));
             }           
             return item;
         }

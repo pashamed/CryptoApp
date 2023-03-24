@@ -36,10 +36,10 @@ namespace CryproApp.ViewModels
                     var item = SampleItems.FirstOrDefault(i => i.Id == value.Id);
                     if (item != null)
                     {
-                        item = Task.Run(async() => await CurrencyDataService.GetHistoryDataAsync(SampleItems.FirstOrDefault(i => i.Id == value.Id))).Result;                       
+                        item = Task.Run(async () => await CurrencyDataService.GetHistoryDataAsync(SampleItems.FirstOrDefault(i => i.Id == value.Id))).Result;                     
                     }
                 }
-                bool newwest = SetProperty(ref _selected, value);
+                SetProperty(ref _selected, value);
             }
         }
 
@@ -62,7 +62,6 @@ namespace CryproApp.ViewModels
 
             if (viewState == ListDetailsViewState.Both)
             {
-                SampleItems[0] = await CurrencyDataService.GetHistoryDataAsync(SampleItems.First()).ConfigureAwait(true);
                 Selected = SampleItems.First();
             }
         }

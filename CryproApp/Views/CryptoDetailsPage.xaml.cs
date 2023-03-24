@@ -18,18 +18,11 @@ namespace CryproApp.Views
             
             InitializeComponent();
             Loaded += CryptoDetailsPage_Loaded;
-            //Loading += CryptoDetailsPage_Loading;
-        }
-
-        private async void CryptoDetailsPage_Loading(FrameworkElement sender, object args)
-        {
-            await Task.Delay(1000);
         }
 
         private async void CryptoDetailsPage_Loaded(object sender, RoutedEventArgs e)
         {
             await ViewModel.LoadDataAsync(ListDetailsViewControl.ViewState);
-            //await CurrencyDataService.GetHistoryDataAsync(ViewModel.SampleItems.FirstOrDefault(x => x.Id == ViewModel.Selected.Id));
         }
     }
 }

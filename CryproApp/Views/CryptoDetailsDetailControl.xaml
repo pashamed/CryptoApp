@@ -1,15 +1,16 @@
 ﻿<UserControl
-    x:Class="CryproApp.Views.CryptoDetailsDetailControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tc="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:Custom="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    x:Class="CryproApp.Views.CryptoDetailsDetailControl"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <ScrollViewer
-        Name="ForegroundElement"
+        x:Name="ForegroundElement"
         Padding="{StaticResource DetailPageMargin}"
         HorizontalAlignment="Stretch"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -21,52 +22,52 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="48"
-                    Glyph="{x:Bind ListMenuItem.CurrencyCode, Mode=OneWay}" FontFamily="Microsoft YaHei UI" />
+                    Glyph="{x:Bind Mode=OneWay, Path=ListMenuItem.CurrencyCode}" FontFamily="Microsoft YaHei UI" />
                 <TextBlock
                     Margin="{StaticResource SmallLeftMargin}"
                     VerticalAlignment="Center"
-                    Text="{x:Bind ListMenuItem.Name, Mode=OneWay}"
+                    Text="{x:Bind Mode=OneWay, Path=ListMenuItem.Name}"
                     Style="{ThemeResource TitleTextBlockStyle}" />
             </StackPanel>
-            <StackPanel Name="block" Padding="0,15,0,0">
+            <StackPanel x:Name="block" Padding="0,15,0,0">
                 <TextBlock Style="{StaticResource DetailSubTitleStyle}" Text="Rank" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Rank, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Mode=OneWay, Path=ListMenuItem.Rank}" />
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Name" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Name, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Mode=OneWay, Path=ListMenuItem.Name}" />
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Price USD" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.PriceUsd, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Mode=OneWay, Path=ListMenuItem.PriceUsd}" />
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Market Cup USD" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.MarketCapUsd, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Mode=OneWay, Path=ListMenuItem.MarketCapUsd}" />
                 <TextBlock
                     Margin="{StaticResource SmallTopMargin}"
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Volume used in 24 Hr" />
-                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.VolumeUsed24Hr, Mode=OneWay}" />
+                <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Mode=OneWay, Path=ListMenuItem.VolumeUsed24Hr}" />
             </StackPanel>
-            <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftTopMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="400">
+            <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftTopMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="700">
                 <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                     <tc:RadCartesianChart x:Name="PriceChart" x:Uid="CartesianChart" RenderTransformOrigin="0.5,0.5">
                         <tc:RadCartesianChart.HorizontalAxis>
-                            <tc:DateTimeContinuousAxis LabelFitMode="MultiLine" LabelFormat="MMM yyyy"/>
+                            <tc:DateTimeContinuousAxis LabelFitMode="MultiLine" LabelFormat="{}{0,0:dd/MMM}"/>
                         </tc:RadCartesianChart.HorizontalAxis>
                         <tc:RadCartesianChart.VerticalAxis>
-                            <tc:LinearAxis Name="USD"/>
+                            <tc:LinearAxis x:Name="USD"/>
                         </tc:RadCartesianChart.VerticalAxis>
-                        <tc:LineSeries ItemsSource="{x:Bind  ListMenuItem.candleDataPoints, Mode=OneWay}" ShowLabels="True">
+                        <tc:LineSeries ItemsSource="{x:Bind Mode=OneWay, Path=ListMenuItem.candleDataPoints}" ShowLabels="True" >
                             <tc:LineSeries.CategoryBinding>
-                                <tc:PropertyNameDataPointBinding PropertyName="date" />
+                                <tc:PropertyNameDataPointBinding PropertyName="date"/>
                             </tc:LineSeries.CategoryBinding>
                             <tc:LineSeries.ValueBinding>
-                                <tc:PropertyNameDataPointBinding PropertyName="priceUsd" />
+                                <tc:PropertyNameDataPointBinding PropertyName="priceUsd"/>
                             </tc:LineSeries.ValueBinding>
                         </tc:LineSeries>
                     </tc:RadCartesianChart>
