@@ -43,7 +43,7 @@ namespace CryproApp.ViewModels
             }
         }
 
-        public ObservableCollection<Currency> SampleItems { get; private set; } = new ObservableCollection<Currency>();
+        public ObservableCollection<Currency> SampleItems { get;  set; } = new ObservableCollection<Currency>();
 
         public CryptoDetailsViewModel()
         {

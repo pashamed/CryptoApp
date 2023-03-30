@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tc="using:Telerik.UI.Xaml.Controls.Chart"
-    xmlns:Custom="using:Microsoft.Toolkit.Uwp.UI.Converters"
     x:Class="CryproApp.Views.CryptoDetailsDetailControl"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -17,7 +16,7 @@
         VerticalScrollMode="Enabled"
         IsTabStop="True">
         <StackPanel HorizontalAlignment="Left">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="38">
                 <FontIcon
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -52,17 +51,23 @@
                     Style="{StaticResource DetailSubTitleStyle}"
                     Text="Volume used in 24 Hr" />
                 <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind Mode=OneWay, Path=ListMenuItem.VolumeUsed24Hr}" />
+                <SplitView Height="100" d:LayoutOverrides="Width">
+                    <SplitView.Pane>
+                        <Grid/>
+                    </SplitView.Pane>
+                    <Grid/>
+                </SplitView>
             </StackPanel>
-            <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftTopMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="700">
+            <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftTopMargin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="300">
                 <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                     <tc:RadCartesianChart x:Name="PriceChart" x:Uid="CartesianChart" RenderTransformOrigin="0.5,0.5">
                         <tc:RadCartesianChart.HorizontalAxis>
                             <tc:DateTimeContinuousAxis LabelFitMode="MultiLine" LabelFormat="{}{0,0:dd/MMM}"/>
                         </tc:RadCartesianChart.HorizontalAxis>
                         <tc:RadCartesianChart.VerticalAxis>
-                            <tc:LinearAxis x:Name="USD"/>
+                            <tc:LinearAxis/>
                         </tc:RadCartesianChart.VerticalAxis>
-                        <tc:LineSeries ItemsSource="{x:Bind Mode=OneWay, Path=ListMenuItem.candleDataPoints}" ShowLabels="True" >
+                        <tc:LineSeries ItemsSource="{x:Bind Mode=OneWay, Path=ListMenuItem.candleDataPoints}">
                             <tc:LineSeries.CategoryBinding>
                                 <tc:PropertyNameDataPointBinding PropertyName="date"/>
                             </tc:LineSeries.CategoryBinding>
