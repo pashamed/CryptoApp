@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CryproApp.Core.Models;
 using CryproApp.Core.Services;
-using CryproApp.Views;
-using Microsoft.Toolkit;
-using Microsoft.Toolkit.Uwp;
-using Microsoft.Toolkit.Uwp.Helpers;
-using Microsoft.Toolkit.Uwp.UI;
 using Microsoft.Toolkit.Uwp.UI.Controls;
-using Newtonsoft.Json.Linq;
-using Telerik.UI.Xaml.Controls.Chart;
-using Windows.UI.Core;
 
 namespace CryproApp.ViewModels
 {
@@ -43,7 +32,7 @@ namespace CryproApp.ViewModels
             }
         }
 
-        public ObservableCollection<Currency> SampleItems { get;  set; } = new ObservableCollection<Currency>();
+        public ObservableCollection<Currency> SampleItems { get; set; } = new ObservableCollection<Currency>();
 
         public CryptoDetailsViewModel()
         {

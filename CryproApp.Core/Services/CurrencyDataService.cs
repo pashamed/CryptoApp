@@ -7,6 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Linq;
+using CryproApp.Core.Helpers;
 
 namespace CryproApp.Core.Services
 {
@@ -21,23 +22,26 @@ namespace CryproApp.Core.Services
 
         public static Task PreLoadData()
         {
-            using (var client = new HttpClient())
+            if (true)
             {
-                client.BaseAddress = new Uri("http://api.coincap.io/v2/");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "251cb894-b470-443d-a564-8362e3339dd1");
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = client.GetAsync("assets").Result;
-                response.EnsureSuccessStatusCode();
-                string s = response.Content.ReadAsStringAsync().Result;
-
-                var deserialized = JsonConvert.DeserializeObject<DataJson>(s);
-                foreach (var item in deserialized.data)
+                using (var client = new HttpClient())
                 {
+                    client.BaseAddress = new Uri("http://api.coincap.io/v2/");
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "251cb894-b470-443d-a564-8362e3339dd1");
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = client.GetAsync("assets").Result;
+                    response.EnsureSuccessStatusCode();
+                    string s = response.Content.ReadAsStringAsync().Result;
+
+                    var deserialized = JsonConvert.DeserializeObject<DataJson>(s);
+                    foreach (var item in deserialized.data)
+                    {
                         Currencies.Add(item);
+                    }
                 }
+                return Task.CompletedTask; 
             }
-            return Task.CompletedTask;
         }
 
         public static async Task<IEnumerable<CandleDataPoint>> GetChartDataAsync()

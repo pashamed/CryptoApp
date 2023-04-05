@@ -170,6 +170,7 @@
     <Compile Include="Views\CryptoDetailsPage.xaml.cs">
       <DependentUpon>CryptoDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IServiceDuplexCallback.cs" />
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>

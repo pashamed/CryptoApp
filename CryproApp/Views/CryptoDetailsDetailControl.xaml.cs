@@ -2,6 +2,8 @@
 using System.Runtime.CompilerServices;
 using CryproApp.Core.Models;
 using CryproApp.Core.Services;
+using CryproApp.Helpers;
+using Telerik.UI.Xaml.Controls.Data.ListView;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -25,7 +27,7 @@ namespace CryproApp.Views
         private static void OnListMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as CryptoDetailsDetailControl;
-            control.ForegroundElement.ChangeView(0, 0, 1);
+            control.ForegroundElement.ChangeView(0, 0, 1);           
         }
     }
 }
